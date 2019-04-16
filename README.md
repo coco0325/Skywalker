@@ -1,2 +1,2 @@
 # Skywalker
-A Spigot plugin creates temporary invisible blocks for player to walk on.
+A Spigot (1.12.2) plugin creates temporary invisible blocks for player to walk on.
