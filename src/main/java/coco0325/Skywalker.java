@@ -2,21 +2,18 @@ package coco0325;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitScheduler;
 
-public final class Skywalker extends JavaPlugin {
+public final class Skywalker extends JavaPlugin implements CommandExecutor {
 
     @Override
-    public void onEnable() {
-
-
-    }
+    public void onEnable() {}
 
     @Override
     public void onDisable() {
@@ -24,7 +21,20 @@ public final class Skywalker extends JavaPlugin {
     }
 
     public void GenerateBlocks(Location location){
-
+        Block center = location.subtract(0,1,0).getBlock();
+        Block[] blocks = {center, center.getRelative(0,0,1)
+                , center.getRelative(0,0,-1)
+                , center.getRelative(1,0,0)
+                , center.getRelative(1,0,1)
+                , center.getRelative(1,0,-1)
+                , center.getRelative(-1,0,1)
+                , center.getRelative(-1,0,0)
+                , center.getRelative(-1,0,-1)};
+        for(Block block : blocks){
+            if(block.isEmpty()){
+                block.setType(Material.BARRIER);
+            }
+        }
     }
 
     @Override
@@ -34,7 +44,7 @@ public final class Skywalker extends JavaPlugin {
                 if (args.length == 2) {
                     if(getServer().getOnlinePlayers().contains(args[0])) {
                         Player player = getServer().getPlayer(args[0]);
-                        Integer time = Integer.parseInt(args[1])*20;
+                        Integer time = Integer.parseInt(args[1])*4;
                         int scheduler = getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
                             @Override
                             public void run() {
@@ -48,6 +58,7 @@ public final class Skywalker extends JavaPlugin {
                                 Bukkit.getScheduler().cancelTask(scheduler);
                             }
                         }, time);
+                        return true;
                     } else {
                         sender.sendMessage("玩家不在線!");
                     }
