@@ -1,0 +1,5 @@
+name: Skywalker
+version: ${project.version}
+main: coco0325.Skywalker
+authors: [coco0325]
+description: Skywalking
