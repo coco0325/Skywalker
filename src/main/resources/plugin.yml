@@ -3,3 +3,7 @@ version: ${project.version}
 main: coco0325.Skywalker
 authors: [coco0325]
 description: A Spigot plugin creates temporary invisible blocks for player to walk on.
+
+commands:
+  skywalker:
+    description: Main command
